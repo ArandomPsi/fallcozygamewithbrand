@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://bm4677sv55dym"]
+
+[ext_resource type="Shader" uid="uid://4t68f1l4x2ie" path="res://water.gdshader" id="1_julm7"]
+[ext_resource type="Texture2D" uid="uid://tcnqoqwl1btc" path="res://sprites.png" id="2_axgwx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_axgwx"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ys0t5"]
+seamless = true
+noise = SubResource("FastNoiseLite_axgwx")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8vdae"]
+noise_type = 2
+frequency = 0.0361
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6seei"]
+seamless = true
+noise = SubResource("FastNoiseLite_8vdae")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dbxb2"]
+shader = ExtResource("1_julm7")
+shader_parameter/offSet = 0.0
+shader_parameter/YDistortion = 1.0
+shader_parameter/waterNoise = SubResource("NoiseTexture2D_6seei")
+shader_parameter/waterDistortionNoise = SubResource("NoiseTexture2D_ys0t5")
+shader_parameter/waterColor = Color(0.117, 0.27, 0.58, 1)
+shader_parameter/colorCorection = 0.35
+shader_parameter/distortionForce = 0.01
+shader_parameter/WDBrightness = 1.5
+shader_parameter/WDFreq = 0.6
+shader_parameter/WDSize = 0.9
+shader_parameter/WDSpeed = 4.0
+shader_parameter/tiling = Vector2(1, 1)
+shader_parameter/offSetSpeed = Vector2(0.1, 0.1)
+shader_parameter/backGroundDirX = 0.1
+shader_parameter/backGroundDirY = 0.1
+
+[node name="testmap" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_dbxb2")
+offset_top = 225.0
+offset_right = 1165.0
+offset_bottom = 666.0
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(872, 481)
+scale = Vector2(10, 10)
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(126, 72, 66, 26)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(697, 407)
+scale = Vector2(10, 10)
+texture = ExtResource("2_axgwx")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(10, 41, 13, 12)
