@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo1rhf2p02i2v"]
+
+[ext_resource type="Texture2D" uid="uid://tcnqoqwl1btc" path="res://sprites.png" id="1_44m4w"]
+[ext_resource type="Script" uid="uid://b5iykmb53juc4" path="res://fish_1.gd" id="1_wg3u8"]
+
+[node name="fish1" type="Node2D"]
+script = ExtResource("1_wg3u8")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(10, 10)
+texture = ExtResource("1_44m4w")
+region_enabled = true
+region_rect = Rect2(100, 38, 7, 5)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="pivot" type="Node2D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

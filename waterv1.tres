@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://dyy4yquq4bi5v"]
+
+[ext_resource type="Shader" uid="uid://4t68f1l4x2ie" path="res://water.gdshader" id="1_uu4x0"]
+
+[sub_resource type="Gradient" id="Gradient_8vdae"]
+offsets = PackedFloat32Array(0.66187, 1)
+colors = PackedColorArray(0, 0.38, 0.348333, 1, 0, 0.85, 0.779167, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6seei"]
+gradient = SubResource("Gradient_8vdae")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dbxb2"]
+frequency = 0.0094
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ov2oi"]
+seamless = true
+noise = SubResource("FastNoiseLite_dbxb2")
+
+[resource]
+shader = ExtResource("1_uu4x0")
+shader_parameter/iChannel0 = SubResource("NoiseTexture2D_ov2oi")
+shader_parameter/iChannel1 = SubResource("NoiseTexture2D_ov2oi")
+shader_parameter/param1 = Vector2(0.3, 0.2)
+shader_parameter/param2 = Vector2(0.4, 0.7)
+shader_parameter/param3 = Vector2(0.3, 0.1)
+shader_parameter/gradient = SubResource("GradientTexture1D_6seei")
+shader_parameter/pixel_size = 100.0

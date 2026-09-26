@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 	
 	position = trueposition + Vector2(0,z)/5
 	
-	print(str(z) + "," + str(zvel))
+	
 	
 
 func launchbobber():
@@ -32,9 +32,12 @@ func launchbobber():
 	position = Vector2(0,0)
 	trueposition = position
 	
+	
 	zvel = -500
 	z = -5
-	velocity = Vector2(-50,0)
+	
+	
+	velocity = Vector2(randi_range(-30,-70),0)
 
 func bobberreelin():
 	look_at(get_parent().global_position)
@@ -46,13 +49,19 @@ func bobberreelin():
 
 func bobberpullback():
 	zvel = -500
-	get_parent().state = 0
-	get_parent().inputcooldown = 50
-	get_parent().play("fishpullout")
 	
+	getparentstuff()
 	
 	for i in range(10):
 		position.x = lerp(position.x, -10.0, 0.2)
 		await get_tree().process_frame
 	
 	visible = false
+
+func getparentstuff():
+	
+	get_parent().inputcooldown = 50
+	get_parent().stop()
+	get_parent().play("fishpullout")
+	await get_parent().animation_finished
+	get_parent().state = 0

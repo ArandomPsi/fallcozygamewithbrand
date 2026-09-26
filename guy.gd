@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 func prepcontrols():
 	
 	if inputcooldown < 1:
-		if Input.is_action_just_pressed("fish"):
+		if Input.is_action_pressed("fish"):
 			play("fishaim")
 		if Input.is_action_just_released("fish"):
 			play("fishreel")
