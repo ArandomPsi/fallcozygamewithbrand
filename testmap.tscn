@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://bm4677sv55dym"]
+[gd_scene load_steps=38 format=4 uid="uid://bm4677sv55dym"]
 
 [ext_resource type="Texture2D" uid="uid://hxluugwjy5ex" path="res://Minifantasy_ForgottenPlainsTiles.png" id="1_8vdae"]
 [ext_resource type="Script" uid="uid://cni0yluweyxl8" path="res://testmap.gd" id="1_x6wp4"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" uid="uid://cjm3kroggbr3o" path="res://aqua.gdshader" id="4_x6wp4"]
 [ext_resource type="Script" uid="uid://b4cldevpym5re" path="res://bobber.gd" id="5_dbxb2"]
 [ext_resource type="PackedScene" uid="uid://bo1rhf2p02i2v" path="res://fish_1.tscn" id="7_ov2oi"]
+[ext_resource type="Script" uid="uid://b2u7f1kk41hnw" path="res://rope.gd" id="8_p46d7"]
 [ext_resource type="AudioStream" uid="uid://j17qrpec4w5s" path="res://Gymnopedie no 1.mp3" id="10_u53cx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6seei"]
@@ -648,6 +649,27 @@ scale_min = 2.0
 scale_max = 2.0
 color_ramp = SubResource("GradientTexture1D_dbxb2")
 
+[sub_resource type="Gradient" id="Gradient_p46d7"]
+offsets = PackedFloat32Array(0, 0.268382, 0.714154, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eatbo"]
+gradient = SubResource("Gradient_p46d7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dj5sq"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 1, 1)
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 65.6
+initial_velocity_max = 65.6
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_eatbo")
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_u53cx"]
 atlas = ExtResource("2_axgwx")
 region = Rect2(32, 32, 32, 32)
@@ -748,6 +770,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_p46d7"]
+radius = 12.6
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e86xl"]
 shader = ExtResource("3_ys0t5")
 shader_parameter/angle = -0.3
@@ -844,14 +869,22 @@ flip_v = true
 region_enabled = true
 region_rect = Rect2(126, 72, 66, 26)
 
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="bridge"]
+position = Vector2(-23.2, 10.5)
+scale = Vector2(0.1, 0.02)
+amount = 10
+texture = SubResource("GradientTexture2D_ov2oi")
+lifetime = 0.4
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_dj5sq")
+
 [node name="guy" type="AnimatedSprite2D" parent="."]
+z_index = 1
 texture_filter = 1
 position = Vector2(896, 407)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_dbxb2")
-animation = &"fishpullout"
-frame = 2
-frame_progress = 1.0
+animation = &"fishidle"
 flip_h = true
 script = ExtResource("4_6seei")
 
@@ -875,7 +908,20 @@ region_enabled = true
 region_rect = Rect2(182, 41, 3, 4)
 script = ExtResource("5_dbxb2")
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="Area2D" type="Area2D" parent="guy/bobber"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="guy/bobber/Area2D"]
+shape = SubResource("CircleShape2D_p46d7")
+
+[node name="rope" type="Line2D" parent="." node_paths=PackedStringArray("targetnode")]
+default_color = Color(0, 0, 0, 1)
+script = ExtResource("8_p46d7")
+targetnode = NodePath("../guy/bobber")
+
+[node name="godrays" type="ColorRect" parent="."]
+z_index = 5
 material = SubResource("ShaderMaterial_e86xl")
 offset_left = -203.0
 offset_top = -57.0

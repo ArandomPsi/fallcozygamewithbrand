@@ -50,6 +50,11 @@ func bobberreelin():
 func bobberpullback():
 	zvel = -500
 	
+	#get the fish and delete it
+	var lastcapturedfish = bobbertakeallfish()
+	if not lastcapturedfish == null:
+		lastcapturedfish.queue_free()
+	
 	getparentstuff()
 	
 	for i in range(10):
@@ -57,6 +62,25 @@ func bobberpullback():
 		await get_tree().process_frame
 	
 	visible = false
+
+
+func bobbertakeallfish() -> fishy:
+	var areas: Array = $Area2D.get_overlapping_areas()
+	var closest_area: Area2D = null
+	var closest_distance := INF
+	
+	for area in areas:
+		var distance = global_position.distance_to(area.global_position)
+	
+		if distance < closest_distance:
+			closest_distance = distance
+			closest_area = area
+	
+	if closest_area:
+		return closest_area.get_parent()
+	
+	return null
+
 
 func getparentstuff():
 	

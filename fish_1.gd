@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name fishy
 var velocity : Vector2
 var state : int = 0
 
@@ -40,7 +40,7 @@ func donothing():
 	if position.distance_to(get_parent().bobber.global_position) < get_parent().lurepower:
 		state = 1
 	
-	print(str(position.distance_to(get_parent().bobber.global_position)))
+	
 	
 
 func omnomnom():
