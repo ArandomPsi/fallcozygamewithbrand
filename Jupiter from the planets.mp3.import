@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cphhek0t4f0vq"
+path="res://.godot/imported/Jupiter from the planets.mp3-1b4ca75ebb35cf637ceeed506ea9c347.mp3str"
+
+[deps]
+
+source_file="res://Jupiter from the planets.mp3"
+dest_files=["res://.godot/imported/Jupiter from the planets.mp3-1b4ca75ebb35cf637ceeed506ea9c347.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
