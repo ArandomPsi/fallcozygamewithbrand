@@ -53,6 +53,7 @@ func bobberpullback():
 	#get the fish and delete it
 	var lastcapturedfish = bobbertakeallfish()
 	if not lastcapturedfish == null:
+		createfish("joe")
 		lastcapturedfish.queue_free()
 	
 	getparentstuff()
@@ -63,6 +64,12 @@ func bobberpullback():
 	
 	visible = false
 
+
+func createfish(fishname : String):
+	var b = preload("res://fishpreview.tscn").instantiate()
+	b.position = global_position
+	b.targetpos = Vector2(865,375)
+	get_tree().current_scene.add_child(b)
 
 func bobbertakeallfish() -> fishy:
 	var areas: Array = $Area2D.get_overlapping_areas()
@@ -86,6 +93,7 @@ func getparentstuff():
 	
 	get_parent().inputcooldown = 50
 	get_parent().stop()
+	await get_tree().process_frame
 	get_parent().play("fishpullout")
 	await get_parent().animation_finished
 	get_parent().state = 0
