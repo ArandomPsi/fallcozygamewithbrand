@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://hxluugwjy5ex" path="res://Minifantasy_ForgottenPlainsTiles.png" id="1_8vdae"]
 [ext_resource type="Script" uid="uid://cni0yluweyxl8" path="res://testmap.gd" id="1_x6wp4"]
 [ext_resource type="Texture2D" uid="uid://tcnqoqwl1btc" path="res://sprites.png" id="2_axgwx"]
-[ext_resource type="Shader" uid="uid://0hi4hpal4i3j" path="res://godray.gdshader" id="3_ys0t5"]
+[ext_resource type="Shader" path="res://godray.gdshader" id="3_ys0t5"]
 [ext_resource type="Script" uid="uid://boiegm572oaov" path="res://guy.gd" id="4_6seei"]
 [ext_resource type="Material" uid="uid://dyy4yquq4bi5v" path="res://waterv1.tres" id="4_e86xl"]
 [ext_resource type="Shader" uid="uid://cjm3kroggbr3o" path="res://aqua.gdshader" id="4_x6wp4"]
