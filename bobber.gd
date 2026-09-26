@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 	
 	z += zvel * delta
 	
-	z = clamp(z,-999,20)
+	z = clamp(z,-999,60)
 	
 	
 	position = trueposition + Vector2(0,z)/5
@@ -30,6 +30,7 @@ func launchbobber():
 	print("yes")
 	visible = true
 	position = Vector2(0,0)
+	trueposition = position
 	
 	zvel = -500
 	z = -5
@@ -39,15 +40,19 @@ func bobberreelin():
 	look_at(get_parent().global_position)
 	velocity = transform.x * 20 * Vector2(1,0)
 	rotation_degrees = 0
-	if global_position.distance_to(get_parent().global_position) < 150:
+	if global_position.distance_to(get_parent().global_position) < 200:
 		bobberpullback()
 
 
 func bobberpullback():
-	zvel = -200
-	for i in range(10):
-		position.x = lerp(position.x,0.0,0.1)
-		await get_tree().process_frame
-	visible = false
-	#reset the state
+	zvel = -500
 	get_parent().state = 0
+	get_parent().inputcooldown = 50
+	get_parent().play("fishpullout")
+	
+	
+	for i in range(10):
+		position.x = lerp(position.x, -10.0, 0.2)
+		await get_tree().process_frame
+	
+	visible = false

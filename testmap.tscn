@@ -646,13 +646,13 @@ region = Rect2(32, 32, 32, 32)
 atlas = ExtResource("2_axgwx")
 region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e86xl"]
-atlas = ExtResource("2_axgwx")
-region = Rect2(0, 32, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_x6wp4"]
 atlas = ExtResource("2_axgwx")
 region = Rect2(63, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e86xl"]
+atlas = ExtResource("2_axgwx")
+region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ov2oi"]
 atlas = ExtResource("2_axgwx")
@@ -686,12 +686,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_x6wp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e86xl")
+}],
+"loop": false,
+"name": &"fishpull",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_e86xl")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x6wp4")
 }, {
-"duration": 1.0,
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_ov2oi")
+}, {
+"duration": 5.0,
 "texture": SubResource("AtlasTexture_ov2oi")
 }],
 "loop": false,
@@ -710,7 +724,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"fishreel",
-"speed": 10.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 10.0,
@@ -802,7 +816,6 @@ modulate = Color(0, 0, 0, 0.305882)
 show_behind_parent = true
 texture_filter = 1
 position = Vector2(1.67638e-08, 1.8)
-scale = Vector2(1, 1)
 texture = ExtResource("2_axgwx")
 flip_v = true
 region_enabled = true
@@ -813,7 +826,7 @@ texture_filter = 1
 position = Vector2(697, 407)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_dbxb2")
-animation = &"fishreel"
+animation = &"fishpullout"
 frame = 2
 frame_progress = 1.0
 flip_h = true
@@ -833,10 +846,10 @@ region_rect = Rect2(10, 41, 13, 12)
 
 [node name="bobber" type="Sprite2D" parent="guy"]
 visible = false
-position = Vector2(-12.8, 0)
+position = Vector2(-2.5, 0)
 texture = ExtResource("2_axgwx")
 region_enabled = true
-region_rect = Rect2(183, 42, 1, 2)
+region_rect = Rect2(182, 41, 3, 4)
 script = ExtResource("5_dbxb2")
 
 [node name="ColorRect2" type="ColorRect" parent="."]
@@ -848,3 +861,5 @@ offset_bottom = 552.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8vdae")
+
+[connection signal="animation_finished" from="guy" to="guy" method="_on_animation_finished"]
