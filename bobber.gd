@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 	
 	lastz = z
 	
-	
+	$Area2D/CollisionShape2D.disabled = not visible
 	
 	
 

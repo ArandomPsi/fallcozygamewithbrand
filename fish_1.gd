@@ -74,7 +74,7 @@ func donothing():
 	
 	position.y = clamp(position.y,275,650)
 	
-	if position.distance_to(get_parent().bobber.global_position) < get_parent().lurepower:
+	if position.distance_to(get_parent().bobber.global_position) < get_parent().lurepower and get_parent().mode == 1:
 		state = 1
 	velocity.x = clampf(velocity.x, -300,300)
 	velocity.y = clampf(velocity.y, -300,300)

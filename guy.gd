@@ -5,13 +5,14 @@ var inputcooldown : int = 0
 @export var label : Label
 
 func _process(delta: float) -> void:
-	inputcooldown -= 1
-	inputcooldown = clamp(inputcooldown,-1,999)
-	if state == 1:
-		fishingcontrols()
-	else:
-		prepcontrols()
-	global.ggmp = get_global_mouse_position()
+	if get_parent().mode == 1:
+		inputcooldown -= 1
+		inputcooldown = clamp(inputcooldown,-1,999)
+		if state == 1:
+			fishingcontrols()
+		else:
+			prepcontrols()
+		global.ggmp = get_global_mouse_position()
 
 
 

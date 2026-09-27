@@ -1,8 +1,9 @@
-[gd_scene load_steps=47 format=4 uid="uid://bm4677sv55dym"]
+[gd_scene load_steps=62 format=4 uid="uid://bm4677sv55dym"]
 
 [ext_resource type="Texture2D" uid="uid://hxluugwjy5ex" path="res://Minifantasy_ForgottenPlainsTiles.png" id="1_8vdae"]
 [ext_resource type="Script" uid="uid://cni0yluweyxl8" path="res://testmap.gd" id="1_x6wp4"]
 [ext_resource type="Texture2D" uid="uid://tcnqoqwl1btc" path="res://sprites.png" id="2_axgwx"]
+[ext_resource type="Shader" uid="uid://3bqygcx16e3r" path="res://grass.gdshader" id="3_syahw"]
 [ext_resource type="Shader" uid="uid://0hi4hpal4i3j" path="res://godray.gdshader" id="3_ys0t5"]
 [ext_resource type="Script" uid="uid://boiegm572oaov" path="res://guy.gd" id="4_6seei"]
 [ext_resource type="Material" uid="uid://dyy4yquq4bi5v" path="res://waterv1.tres" id="4_e86xl"]
@@ -14,6 +15,9 @@
 [ext_resource type="AudioStream" uid="uid://j17qrpec4w5s" path="res://Gymnopedie no 1.mp3" id="10_u53cx"]
 [ext_resource type="Script" uid="uid://bmj0xdbpjt0hj" path="res://fishspawner.gd" id="13_7obgi"]
 [ext_resource type="Script" uid="uid://bhq4nogm2fv4k" path="res://hud.gd" id="13_dj5sq"]
+[ext_resource type="Script" uid="uid://dx43r1j7qfpe6" path="res://bobons.gd" id="14_s7y1m"]
+[ext_resource type="Texture2D" uid="uid://ckc42333l2ili" path="res://ponder2.png" id="15_07kpr"]
+[ext_resource type="Shader" uid="uid://bfsuwtgq7w2cf" path="res://thecutscene.gdshader" id="16_rtndc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6seei"]
 texture = ExtResource("1_8vdae")
@@ -590,6 +594,23 @@ texture_region_size = Vector2i(8, 8)
 tile_size = Vector2i(8, 8)
 sources/0 = SubResource("TileSetAtlasSource_6seei")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s7y1m"]
+frequency = 0.0025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_07kpr"]
+seamless = true
+noise = SubResource("FastNoiseLite_s7y1m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rtndc"]
+shader = ExtResource("3_syahw")
+shader_parameter/render_noise = false
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_07kpr")
+shader_parameter/amplitude = 0.07
+shader_parameter/time_scale = 0.04
+shader_parameter/noise_scale = 0.001
+shader_parameter/rotation_strength = 0.2
+shader_parameter/rotation_pivot = Vector2(0.5, 1)
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e86xl"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u53cx"]
@@ -839,6 +860,51 @@ glow_blend_mode = 1
 adjustment_enabled = true
 adjustment_saturation = 1.2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7y1m"]
+bg_color = Color(0, 0, 0, 0.278431)
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07kpr"]
+bg_color = Color(0, 0, 0, 0.603922)
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+expand_margin_right = 10.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_07kpr"]
+frequency = 0.0061
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rtndc"]
+seamless = true
+noise = SubResource("FastNoiseLite_07kpr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7qq4w"]
+shader = ExtResource("3_syahw")
+shader_parameter/render_noise = false
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_rtndc")
+shader_parameter/amplitude = 0.09
+shader_parameter/time_scale = 0.04
+shader_parameter/noise_scale = 0.001
+shader_parameter/rotation_strength = 0.6
+shader_parameter/rotation_pivot = Vector2(0.5, 1)
+
+[sub_resource type="Gradient" id="Gradient_rtndc"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7qq4w"]
+gradient = SubResource("Gradient_rtndc")
+width = 640
+height = 640
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9, 0.1)
+metadata/_snap_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7wrg"]
+shader = ExtResource("16_rtndc")
+shader_parameter/noise_intensity = 0.058
+
 [node name="testmap" type="Node2D" node_paths=PackedStringArray("bobber", "player")]
 script = ExtResource("1_x6wp4")
 bobber = NodePath("guy/bobber")
@@ -854,6 +920,7 @@ tile_map_data = PackedByteArray("AAD//wIAAAAlAA4AAAD//wMAAAAlAA8AAAAAAAIAAAAlAA4
 tile_set = SubResource("TileSet_dbxb2")
 
 [node name="Sprite2D" type="Sprite2D" parent="TileMapLayer"]
+material = SubResource("ShaderMaterial_rtndc")
 position = Vector2(30.6, 5.4)
 texture = ExtResource("2_axgwx")
 region_enabled = true
@@ -870,6 +937,7 @@ region_enabled = true
 region_rect = Rect2(133, 37, 21, 27.7828)
 
 [node name="Sprite2D2" type="Sprite2D" parent="TileMapLayer"]
+material = SubResource("ShaderMaterial_rtndc")
 position = Vector2(11.2, 7.6)
 texture = ExtResource("2_axgwx")
 region_enabled = true
@@ -886,6 +954,7 @@ region_enabled = true
 region_rect = Rect2(133, 37, 21, 27.7828)
 
 [node name="Sprite2D3" type="Sprite2D" parent="TileMapLayer"]
+material = SubResource("ShaderMaterial_rtndc")
 position = Vector2(56.2, 2.2)
 texture = ExtResource("2_axgwx")
 region_enabled = true
@@ -902,6 +971,7 @@ region_enabled = true
 region_rect = Rect2(133, 37, 21, 27.7828)
 
 [node name="Sprite2D4" type="Sprite2D" parent="TileMapLayer"]
+material = SubResource("ShaderMaterial_rtndc")
 position = Vector2(46.9, 8.3)
 texture = ExtResource("2_axgwx")
 region_enabled = true
@@ -918,6 +988,7 @@ region_enabled = true
 region_rect = Rect2(133, 37, 21, 27.7828)
 
 [node name="Sprite2D6" type="Sprite2D" parent="TileMapLayer"]
+material = SubResource("ShaderMaterial_rtndc")
 position = Vector2(78.7, 3.2)
 texture = ExtResource("2_axgwx")
 region_enabled = true
@@ -934,6 +1005,7 @@ region_enabled = true
 region_rect = Rect2(133, 37, 21, 27.7828)
 
 [node name="Sprite2D8" type="Sprite2D" parent="TileMapLayer"]
+material = SubResource("ShaderMaterial_rtndc")
 position = Vector2(101.1, 1.8)
 texture = ExtResource("2_axgwx")
 region_enabled = true
@@ -950,6 +1022,7 @@ region_enabled = true
 region_rect = Rect2(133, 37, 21, 27.7828)
 
 [node name="Sprite2D7" type="Sprite2D" parent="TileMapLayer"]
+material = SubResource("ShaderMaterial_rtndc")
 position = Vector2(87.5, 6.2)
 texture = ExtResource("2_axgwx")
 region_enabled = true
@@ -966,6 +1039,7 @@ region_enabled = true
 region_rect = Rect2(133, 37, 21, 27.7828)
 
 [node name="Sprite2D10" type="Sprite2D" parent="TileMapLayer"]
+material = SubResource("ShaderMaterial_rtndc")
 position = Vector2(120.2, 4)
 texture = ExtResource("2_axgwx")
 region_enabled = true
@@ -982,6 +1056,7 @@ region_enabled = true
 region_rect = Rect2(133, 37, 21, 27.7828)
 
 [node name="Sprite2D9" type="Sprite2D" parent="TileMapLayer"]
+material = SubResource("ShaderMaterial_rtndc")
 position = Vector2(106.7, 7)
 texture = ExtResource("2_axgwx")
 region_enabled = true
@@ -998,6 +1073,7 @@ region_enabled = true
 region_rect = Rect2(133, 37, 21, 27.7828)
 
 [node name="Sprite2D5" type="Sprite2D" parent="TileMapLayer"]
+material = SubResource("ShaderMaterial_rtndc")
 position = Vector2(66, 8.3)
 texture = ExtResource("2_axgwx")
 region_enabled = true
@@ -1135,6 +1211,9 @@ limit_left = 0
 limit_top = 0
 limit_right = 1152
 limit_bottom = 648
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="rope" type="Line2D" parent="." node_paths=PackedStringArray("targetnode")]
 default_color = Color(0, 0, 0, 1)
@@ -1161,7 +1240,8 @@ autoplay = true
 script = ExtResource("13_dj5sq")
 
 [node name="fishdex" type="Panel" parent="hud"]
-offset_right = 443.0
+offset_left = -462.0
+offset_right = -19.0
 offset_bottom = 651.0
 
 [node name="Label" type="Label" parent="hud/fishdex"]
@@ -1198,7 +1278,53 @@ theme_override_constants/outline_size = 12
 theme_override_fonts/normal_font = ExtResource("6_eatbo")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "Get catching!"
+text = "Get catching!
+Click to catch and reel in
+Fish them all"
+
+[node name="titlestuff" type="Control" parent="hud"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="play" type="Button" parent="hud/titlestuff"]
+offset_top = 517.0
+offset_right = 176.0
+offset_bottom = 562.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_eatbo")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/disabled = SubResource("StyleBoxFlat_s7y1m")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_07kpr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_s7y1m")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_s7y1m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_07kpr")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_s7y1m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_s7y1m")
+text = "Play"
+alignment = 2
+script = ExtResource("14_s7y1m")
+
+[node name="Ponder" type="Sprite2D" parent="hud/titlestuff"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_7qq4w")
+position = Vector2(229, 358)
+scale = Vector2(2.22785, 2.22785)
+texture = ExtResource("15_07kpr")
+
+[node name="vg" type="Sprite2D" parent="hud"]
+self_modulate = Color(1, 1, 1, 0.380392)
+position = Vector2(578.5, 329.5)
+scale = Vector2(1.82969, 1.04219)
+texture = SubResource("GradientTexture2D_7qq4w")
+
+[node name="grn" type="ColorRect" parent="hud"]
+material = SubResource("ShaderMaterial_d7wrg")
+offset_right = 1222.0
+offset_bottom = 685.0
+mouse_filter = 2
 
 [node name="fish1" parent="." instance=ExtResource("7_ov2oi")]
 position = Vector2(-12, 362)
@@ -1211,3 +1337,4 @@ script = ExtResource("13_7obgi")
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="animation_finished" from="guy" to="guy" method="_on_animation_finished"]
 [connection signal="area_entered" from="guy/bobber/Area2D2" to="guy/bobber" method="_on_area_2d_2_body_entered"]
+[connection signal="pressed" from="hud/titlestuff/play" to="." method="_on_play_pressed"]
