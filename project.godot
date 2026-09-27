@@ -14,6 +14,9 @@ config/name="fallcozygame"
 run/main_scene="uid://bm4677sv55dym"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
+boot_splash/bg_color=Color(0, 0, 0.18, 1)
+boot_splash/use_filter=false
+boot_splash/image="uid://bfao5bhp6lbdp"
 config/icon="res://icon.svg"
 
 [autoload]
@@ -39,3 +42,8 @@ fish={
 [layer_names]
 
 2d_physics/layer_3="fishyfishy"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
