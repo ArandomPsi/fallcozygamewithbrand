@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b6e3ef0h8um1p"
+path="res://.godot/imported/your love is my drug.mp3-329e70a892ab57f0c3e66ea558fee275.mp3str"
+
+[deps]
+
+source_file="res://your love is my drug.mp3"
+dest_files=["res://.godot/imported/your love is my drug.mp3-329e70a892ab57f0c3e66ea558fee275.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
