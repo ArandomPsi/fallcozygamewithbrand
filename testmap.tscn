@@ -1289,6 +1289,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="play" type="Button" parent="hud/titlestuff"]
+layout_mode = 0
 offset_top = 517.0
 offset_right = 176.0
 offset_bottom = 562.0
@@ -1315,7 +1316,7 @@ scale = Vector2(2.22785, 2.22785)
 texture = ExtResource("15_07kpr")
 
 [node name="vg" type="Sprite2D" parent="hud"]
-self_modulate = Color(1, 1, 1, 0.380392)
+self_modulate = Color(1, 1, 1, 0.2)
 position = Vector2(578.5, 329.5)
 scale = Vector2(1.82969, 1.04219)
 texture = SubResource("GradientTexture2D_7qq4w")

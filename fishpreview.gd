@@ -1,7 +1,14 @@
 extends Node2D
 @export var targetpos : Vector2
-
-
+@onready var sprite = $Sprite2D
+var tinygoldenfish = Rect2(100,11,7,5)
+var tinyplainfish = Rect2(116,11,7,5)
+var mediumfish = Rect2(99,25,9,7)
+var largeyellowfish = Rect2(131,9,9,7)
+var largeplainfish = Rect2(147,9,9,7)
+var shark = Rect2(114,19,27,13)
+var swordfish = Rect2(146,20,28,10)
+var colecanath = Rect2(160,1,30,14)
 
 func _ready() -> void:
 	var ogpos : Vector2 = position
