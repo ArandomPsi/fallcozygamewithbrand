@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://bm4677sv55dym"]
+[gd_scene load_steps=47 format=4 uid="uid://bm4677sv55dym"]
 
 [ext_resource type="Texture2D" uid="uid://hxluugwjy5ex" path="res://Minifantasy_ForgottenPlainsTiles.png" id="1_8vdae"]
 [ext_resource type="Script" uid="uid://cni0yluweyxl8" path="res://testmap.gd" id="1_x6wp4"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bo1rhf2p02i2v" path="res://fish_1.tscn" id="7_ov2oi"]
 [ext_resource type="Script" uid="uid://b2u7f1kk41hnw" path="res://rope.gd" id="8_p46d7"]
 [ext_resource type="AudioStream" uid="uid://j17qrpec4w5s" path="res://Gymnopedie no 1.mp3" id="10_u53cx"]
+[ext_resource type="Script" uid="uid://bmj0xdbpjt0hj" path="res://fishspawner.gd" id="13_7obgi"]
 [ext_resource type="Script" uid="uid://bhq4nogm2fv4k" path="res://hud.gd" id="13_dj5sq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6seei"]
@@ -603,7 +604,7 @@ noise = SubResource("FastNoiseLite_p46d7")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dj5sq"]
 shader = ExtResource("4_x6wp4")
-shader_parameter/offSet = -5.0
+shader_parameter/offSet = -10.0
 shader_parameter/YDistortion = 0.05
 shader_parameter/waterNoise = SubResource("NoiseTexture2D_eatbo")
 shader_parameter/waterDistortionNoise = SubResource("NoiseTexture2D_u53cx")
@@ -616,7 +617,7 @@ shader_parameter/WDSize = 0.9
 shader_parameter/WDSpeed = 4.0
 shader_parameter/tiling = Vector2(1, 1)
 shader_parameter/offSetSpeed = Vector2(0.01, 0.1)
-shader_parameter/backGroundDirX = 0.034
+shader_parameter/backGroundDirX = 0.018
 shader_parameter/backGroundDirY = 3.25988e-09
 
 [sub_resource type="Gradient" id="Gradient_dbxb2"]
@@ -1023,10 +1024,10 @@ offset_bottom = 717.0
 [node name="water" type="ColorRect" parent="."]
 z_index = -2
 material = SubResource("ShaderMaterial_dj5sq")
-offset_left = -128.0
-offset_top = 266.0
-offset_right = 1293.0
-offset_bottom = 761.0
+offset_left = -242.0
+offset_top = 262.0
+offset_right = 1407.0
+offset_bottom = 765.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(571, 266)
@@ -1151,46 +1152,6 @@ offset_bottom = 552.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8vdae")
 
-[node name="fish1" parent="." instance=ExtResource("7_ov2oi")]
-modulate = Color(1, 1, 1, 0.388235)
-position = Vector2(286, 505)
-
-[node name="fish2" parent="." instance=ExtResource("7_ov2oi")]
-modulate = Color(1, 1, 1, 0.388235)
-position = Vector2(286, 505)
-
-[node name="fish3" parent="." instance=ExtResource("7_ov2oi")]
-modulate = Color(1, 1, 1, 0.388235)
-position = Vector2(286, 505)
-
-[node name="fish4" parent="." instance=ExtResource("7_ov2oi")]
-modulate = Color(1, 1, 1, 0.388235)
-position = Vector2(286, 505)
-
-[node name="fish5" parent="." instance=ExtResource("7_ov2oi")]
-modulate = Color(1, 1, 1, 0.388235)
-position = Vector2(286, 505)
-
-[node name="fish6" parent="." instance=ExtResource("7_ov2oi")]
-modulate = Color(1, 1, 1, 0.388235)
-position = Vector2(286, 505)
-
-[node name="fish7" parent="." instance=ExtResource("7_ov2oi")]
-modulate = Color(1, 1, 1, 0.388235)
-position = Vector2(286, 505)
-
-[node name="fish8" parent="." instance=ExtResource("7_ov2oi")]
-modulate = Color(1, 1, 1, 0.388235)
-position = Vector2(286, 505)
-
-[node name="fish9" parent="." instance=ExtResource("7_ov2oi")]
-modulate = Color(1, 1, 1, 0.388235)
-position = Vector2(286, 505)
-
-[node name="fish10" parent="." instance=ExtResource("7_ov2oi")]
-modulate = Color(1, 1, 1, 0.388235)
-position = Vector2(286, 505)
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_u53cx")
 volume_db = -20.0
@@ -1239,8 +1200,14 @@ theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "Get catching!"
 
+[node name="fish1" parent="." instance=ExtResource("7_ov2oi")]
+position = Vector2(-12, 362)
+
 [node name="fishspawner" type="Node2D" parent="."]
 position = Vector2(-29, 351)
+script = ExtResource("13_7obgi")
 
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="animation_finished" from="guy" to="guy" method="_on_animation_finished"]
 [connection signal="area_entered" from="guy/bobber/Area2D2" to="guy/bobber" method="_on_area_2d_2_body_entered"]

@@ -68,12 +68,7 @@ func bobberpullback():
 	#get the fish and delete it
 	var lastcapturedfish = bobbertakeallfish()
 	if not lastcapturedfish == null:
-		if lastcapturedfish.rarity < 60:
-			createfish(global.common[randi_range(0,global.common.size()-1)])
-		elif lastcapturedfish.rarity < 90:
-			createfish(global.rare[randi_range(0,global.rare.size()-1)])
-		elif lastcapturedfish.rarity < 90:
-			createfish(global.legendary[randi_range(0,global.legendary.size()-1)])
+		createfish(lastcapturedfish.fishname)
 		lastcapturedfish.queue_free()
 	else:
 		get_parent().labelstuff("nothing")
@@ -125,8 +120,8 @@ func getparentstuff():
 
 
 func _on_area_2d_2_body_entered(area: Area2D) -> void:
-	if z < 59:
+	if z > 59:
 		var prevrota : float = rotation
 		look_at(area.global_position)
-		velocity += transform.x * 10
+		velocity += transform.x * -10
 		rotation = prevrota

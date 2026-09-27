@@ -27,4 +27,33 @@ var legendary : PackedStringArray = [
 	"Coelacanth"
 ]
 
+
+var pequeno : PackedStringArray = [
+	"Sardine",
+	"Goldfish",
+	"Anchovy",
+	"Clownfish",
+	"Bluegill",
+	"Sunfish"
+]
+
+var medio : PackedStringArray = [
+	"Mackerel",
+	"Perch",
+	"Trout",
+	"Carp",
+	"Pufferfish",
+	"Koi",
+	"Salmon"
+]
+
+var muygrande : PackedStringArray = [
+	"Catfish",
+	"Tuna",
+	"Shark",
+	"Swordfish",
+	"Coelacanth"
+]
+
+
 var fishcaught : Array = []
