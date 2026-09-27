@@ -2,7 +2,7 @@ extends CanvasLayer
 var fish : Array
 func _process(delta: float) -> void:
 	if get_parent().mode == 1:
-		if global.ggmp.x < 200:
+		if global.ggmp.x < 300:
 			$fishdex.position.x = lerp($fishdex.position.x,0.0,0.2)
 		else:
 			$fishdex.position.x = lerp($fishdex.position.x - 150.0,0.0,0.2)

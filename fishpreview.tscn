@@ -3,8 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://tcnqoqwl1btc" path="res://sprites.png" id="1_aecdf"]
 [ext_resource type="Script" uid="uid://qs5ef5erncam" path="res://fishpreview.gd" id="1_ojylq"]
 
-[node name="fishpreview" type="Node2D"]
+[node name="fishpreview" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_ojylq")
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
@@ -12,4 +13,4 @@ texture_filter = 1
 scale = Vector2(10, 10)
 texture = ExtResource("1_aecdf")
 region_enabled = true
-region_rect = Rect2(160, 1, 30, 14)
+region_rect = Rect2(100, 11, 7, 5)

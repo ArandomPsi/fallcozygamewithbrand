@@ -42,7 +42,6 @@ func splishysplashy():
 	b.position = global_position
 
 func launchbobber():
-	print("yes")
 	visible = true
 	position = Vector2(0,0)
 	trueposition = position
@@ -84,12 +83,36 @@ func bobberpullback():
 
 func createfish(fishname : String):
 	var b = preload("res://fishpreview.tscn").instantiate()
+	print(str(fishname))
+	match fishname:
+		"Shark":
+			b.sprite.region_rect = b.shark
+		"Swordfish":
+			b.sprite.region_rect = b.swordfish
+		"Coelacanth":
+			b.sprite.region_rect = b.colecanath
+		_:
+			if fishname in global.tiny_golden_fish:
+				b.sprite.region_rect = b.tinygoldenfish
+			elif fishname in global.tiny_plain_fish:
+				b.sprite.region_rect = b.tinyplainfish
+			elif fishname in global.medium_fish:
+				b.sprite.region_rect = b.mediumfish
+			elif fishname in global.large_yellow_fish:
+				b.sprite.region_rect = b.largeyellowfish
+			elif fishname in global.large_plain_fish:
+				b.sprite.region_rect = b.largeplainfish
+	
+	
+	
 	b.position = global_position
 	b.targetpos = Vector2(865,375)
 	get_tree().current_scene.add_child(b)
 	get_parent().labelstuff("You caught: " + fishname)
 	if not fishname in global.fishcaught:
 		global.fishcaught.push_back(fishname)
+	
+	
 
 func bobbertakeallfish() -> fishy:
 	var areas: Array = $Area2D.get_overlapping_areas()
@@ -111,7 +134,7 @@ func bobbertakeallfish() -> fishy:
 
 func getparentstuff():
 	get_parent().camzoom()
-	get_parent().inputcooldown = 50
+	get_parent().inputcooldown = 120
 	get_parent().stop()
 	await get_tree().process_frame
 	get_parent().play("fishpullout")

@@ -50,7 +50,6 @@ func labelstuff(text):
 	label.visible = false
 
 func camzoom():
-	print("yo")
 	var tween = create_tween()
 	tween.tween_property($Camera2D, "zoom",Vector2(2.5,2.5),0.5).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property($Camera2D, "zoom",Vector2(1.0,1.0),0.5).set_trans(Tween.TRANS_CUBIC).set_delay(1.5)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://bm4677sv55dym"]
+[gd_scene load_steps=70 format=4 uid="uid://bm4677sv55dym"]
 
 [ext_resource type="Texture2D" uid="uid://hxluugwjy5ex" path="res://Minifantasy_ForgottenPlainsTiles.png" id="1_8vdae"]
 [ext_resource type="Script" uid="uid://cni0yluweyxl8" path="res://testmap.gd" id="1_x6wp4"]
@@ -14,10 +14,17 @@
 [ext_resource type="Script" uid="uid://b2u7f1kk41hnw" path="res://rope.gd" id="8_p46d7"]
 [ext_resource type="AudioStream" uid="uid://j17qrpec4w5s" path="res://Gymnopedie no 1.mp3" id="10_u53cx"]
 [ext_resource type="Script" uid="uid://bmj0xdbpjt0hj" path="res://fishspawner.gd" id="13_7obgi"]
+[ext_resource type="Script" uid="uid://4giqarfglyfg" path="res://bgmusic.gd" id="13_7qq4w"]
 [ext_resource type="Script" uid="uid://bhq4nogm2fv4k" path="res://hud.gd" id="13_dj5sq"]
 [ext_resource type="Script" uid="uid://dx43r1j7qfpe6" path="res://bobons.gd" id="14_s7y1m"]
 [ext_resource type="Texture2D" uid="uid://ckc42333l2ili" path="res://ponder2.png" id="15_07kpr"]
 [ext_resource type="Shader" uid="uid://bfsuwtgq7w2cf" path="res://thecutscene.gdshader" id="16_rtndc"]
+[ext_resource type="Script" uid="uid://dtu36lteylx7v" path="res://intro.gd" id="18_5sp0c"]
+[ext_resource type="Texture2D" uid="uid://ctsn62fso1a5i" path="res://scene1.png" id="18_ltsg5"]
+[ext_resource type="Texture2D" uid="uid://bvlio1q5vprye" path="res://scene2.png.png" id="19_5sp0c"]
+[ext_resource type="Texture2D" uid="uid://bybcnss7xlj1v" path="res://scene3.png.png" id="20_drwh1"]
+[ext_resource type="Texture2D" uid="uid://cmbxov7jpewjb" path="res://scene4.png.png" id="21_0wbb3"]
+[ext_resource type="AudioStream" uid="uid://uo6mmrdeo6ij" path="res://wind.wav" id="25_drwh1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6seei"]
 texture = ExtResource("1_8vdae")
@@ -889,6 +896,26 @@ shader_parameter/noise_scale = 0.001
 shader_parameter/rotation_strength = 0.6
 shader_parameter/rotation_pivot = Vector2(0.5, 1)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_2v0rb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_ltsg5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_5sp0c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_drwh1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_0wbb3")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}]
+
 [sub_resource type="Gradient" id="Gradient_rtndc"]
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
 
@@ -1231,10 +1258,11 @@ offset_bottom = 552.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8vdae")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="bgmusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_u53cx")
 volume_db = -20.0
 autoplay = true
+script = ExtResource("13_7qq4w")
 
 [node name="hud" type="CanvasLayer" parent="."]
 script = ExtResource("13_dj5sq")
@@ -1315,6 +1343,19 @@ position = Vector2(229, 358)
 scale = Vector2(2.22785, 2.22785)
 texture = ExtResource("15_07kpr")
 
+[node name="intro" type="Panel" parent="hud"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("18_5sp0c")
+
+[node name="intro" type="AnimatedSprite2D" parent="hud/intro"]
+position = Vector2(558, 316)
+scale = Vector2(1.29746, 1.29746)
+sprite_frames = SubResource("SpriteFrames_2v0rb")
+
 [node name="vg" type="Sprite2D" parent="hud"]
 self_modulate = Color(1, 1, 1, 0.2)
 position = Vector2(578.5, 329.5)
@@ -1334,8 +1375,15 @@ position = Vector2(-12, 362)
 position = Vector2(-29, 351)
 script = ExtResource("13_7obgi")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_drwh1")
+volume_db = -10.0
+autoplay = true
+mix_target = 1
+
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="animation_finished" from="guy" to="guy" method="_on_animation_finished"]
 [connection signal="area_entered" from="guy/bobber/Area2D2" to="guy/bobber" method="_on_area_2d_2_body_entered"]
+[connection signal="finished" from="bgmusic" to="bgmusic" method="_on_finished"]
 [connection signal="pressed" from="hud/titlestuff/play" to="." method="_on_play_pressed"]

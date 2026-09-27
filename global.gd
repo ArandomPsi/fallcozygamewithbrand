@@ -55,5 +55,34 @@ var muygrande : PackedStringArray = [
 	"Coelacanth"
 ]
 
+var tiny_golden_fish : PackedStringArray = [
+	"Goldfish"
+]
+
+var tiny_plain_fish : PackedStringArray = [
+	"Sardine",
+	"Anchovy",
+	"Clownfish",
+	"Bluegill",
+	"Sunfish"
+]
+
+var large_yellow_fish : PackedStringArray = [
+	"Koi",
+	"Pufferfish"
+]
+
+var large_plain_fish : PackedStringArray = [
+	"Tuna"
+]
+
+var medium_fish : PackedStringArray = [
+	"Mackerel",
+	"Perch",
+	"Trout",
+	"Carp",
+	"Catfish",
+	"Salmon"
+]
 
 var fishcaught : Array = []
