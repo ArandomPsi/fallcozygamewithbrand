@@ -2,7 +2,7 @@ extends AnimatedSprite2D
 var state : int = 0 #prep, fishing, pulling fish
 var inputcooldown : int = 0
 
-
+@export var label : Label
 
 func _process(delta: float) -> void:
 	inputcooldown -= 1
@@ -11,6 +11,7 @@ func _process(delta: float) -> void:
 		fishingcontrols()
 	else:
 		prepcontrols()
+	global.ggmp = get_global_mouse_position()
 
 
 
@@ -37,3 +38,18 @@ func fishingcontrols():
 func _on_animation_finished() -> void:
 	if state == 0:
 		play("idle")
+
+func labelstuff(text):
+	label.text = text
+	label.modulate.a = 1.0
+	label.visible = true
+	var tween = create_tween()
+	tween.tween_property(label,"modulate:a",0.0,0.5).set_delay(2)
+	await tween.finished
+	label.visible = false
+
+func camzoom():
+	print("yo")
+	var tween = create_tween()
+	tween.tween_property($Camera2D, "zoom",Vector2(2.5,2.5),0.5).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($Camera2D, "zoom",Vector2(1.0,1.0),0.5).set_trans(Tween.TRANS_CUBIC).set_delay(1.5)

@@ -2,6 +2,9 @@ extends Node2D
 class_name fishy
 var velocity : Vector2
 var state : int = 0
+@export var rarity : int = randi_range(0,100)
+
+
 
 func _process(delta: float) -> void:
 	position += velocity * delta
@@ -39,8 +42,8 @@ func donothing():
 	
 	if position.distance_to(get_parent().bobber.global_position) < get_parent().lurepower:
 		state = 1
-	
-	
+	velocity.x = clampf(velocity.x, -300,300)
+	velocity.y = clampf(velocity.y, -300,300)
 	
 
 func omnomnom():
@@ -48,7 +51,7 @@ func omnomnom():
 		state = 0
 	
 	$pivot.look_at(get_parent().bobber.global_position)
-	velocity += $pivot.transform.x * 10
+	velocity += $pivot.transform.x * 30
 	
 	
 

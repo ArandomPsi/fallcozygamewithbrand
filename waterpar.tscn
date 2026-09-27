@@ -1,0 +1,99 @@
+[gd_scene load_steps=14 format=3 uid="uid://cskmm6esycw8g"]
+
+[ext_resource type="Script" uid="uid://qtdaqlemuubl" path="res://par.gd" id="1_33xfo"]
+
+[sub_resource type="Gradient" id="Gradient_33xfo"]
+offsets = PackedFloat32Array(0.598773, 0.69816)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j0q0k"]
+gradient = SubResource("Gradient_33xfo")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.2)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_ooglu"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_33xfo"]
+gradient = SubResource("Gradient_ooglu")
+
+[sub_resource type="Curve" id="Curve_33xfo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j0q0k"]
+curve = SubResource("Curve_33xfo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j0q0k"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -100, 0)
+emission_shape = 3
+emission_box_extents = Vector3(20, 1, 1)
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+spread = 9.021
+initial_velocity_min = 225.1
+initial_velocity_max = 739.46
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+gravity = Vector3(0, 1500, 0)
+scale_min = 9.0
+scale_max = 9.0
+scale_curve = SubResource("CurveTexture_j0q0k")
+color_ramp = SubResource("GradientTexture1D_33xfo")
+
+[sub_resource type="Gradient" id="Gradient_j0q0k"]
+offsets = PackedFloat32Array(0.818405, 0.993865)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d8cq2"]
+gradient = SubResource("Gradient_j0q0k")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.2)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_d8cq2"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_avecf"]
+gradient = SubResource("Gradient_d8cq2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eu6gx"]
+particle_flag_disable_z = true
+direction = Vector3(0, -2, 0)
+spread = 51.981
+initial_velocity_min = 366.94
+initial_velocity_max = 680.26
+gravity = Vector3(0, 1500, 0)
+scale_min = 0.2
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_avecf")
+
+[node name="waterpar" type="GPUParticles2D"]
+z_index = 2
+scale = Vector2(0.07, 0.7)
+emitting = false
+amount = 10
+texture = SubResource("GradientTexture2D_j0q0k")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_j0q0k")
+script = ExtResource("1_33xfo")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+scale = Vector2(17.241, 1.429)
+emitting = false
+amount = 10
+texture = SubResource("GradientTexture2D_d8cq2")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_eu6gx")
+script = ExtResource("1_33xfo")

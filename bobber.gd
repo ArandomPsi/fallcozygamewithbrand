@@ -5,6 +5,8 @@ var zvel : float = 0
 
 var trueposition : Vector2
 
+var lastz : float
+
 func _process(delta: float) -> void:
 	
 	if visible:
@@ -18,13 +20,26 @@ func _process(delta: float) -> void:
 	
 	z += zvel * delta
 	
+	
+	
 	z = clamp(z,-999,60)
 	
+	if z == 60 and not lastz == 60:
+		splishysplashy()
 	
 	position = trueposition + Vector2(0,z)/5
 	
+	lastz = z
 	
 	
+	
+	
+
+
+func splishysplashy():
+	var b = preload("res://waterpar.tscn").instantiate()
+	get_tree().current_scene.add_child(b)
+	b.position = global_position
 
 func launchbobber():
 	print("yes")
@@ -53,9 +68,15 @@ func bobberpullback():
 	#get the fish and delete it
 	var lastcapturedfish = bobbertakeallfish()
 	if not lastcapturedfish == null:
-		createfish("joe")
+		if lastcapturedfish.rarity < 60:
+			createfish(global.common[randi_range(0,global.common.size()-1)])
+		elif lastcapturedfish.rarity < 90:
+			createfish(global.rare[randi_range(0,global.rare.size()-1)])
+		elif lastcapturedfish.rarity < 90:
+			createfish(global.legendary[randi_range(0,global.legendary.size()-1)])
 		lastcapturedfish.queue_free()
-	
+	else:
+		get_parent().labelstuff("nothing")
 	getparentstuff()
 	
 	for i in range(10):
@@ -63,6 +84,7 @@ func bobberpullback():
 		await get_tree().process_frame
 	
 	visible = false
+	velocity = Vector2(0,0)
 
 
 func createfish(fishname : String):
@@ -70,6 +92,9 @@ func createfish(fishname : String):
 	b.position = global_position
 	b.targetpos = Vector2(865,375)
 	get_tree().current_scene.add_child(b)
+	get_parent().labelstuff("You caught: " + fishname)
+	if not fishname in global.fishcaught:
+		global.fishcaught.push_back(fishname)
 
 func bobbertakeallfish() -> fishy:
 	var areas: Array = $Area2D.get_overlapping_areas()
@@ -90,10 +115,18 @@ func bobbertakeallfish() -> fishy:
 
 
 func getparentstuff():
-	
+	get_parent().camzoom()
 	get_parent().inputcooldown = 50
 	get_parent().stop()
 	await get_tree().process_frame
 	get_parent().play("fishpullout")
 	await get_parent().animation_finished
 	get_parent().state = 0
+
+
+func _on_area_2d_2_body_entered(area: Area2D) -> void:
+	if z < 59:
+		var prevrota : float = rotation
+		look_at(area.global_position)
+		velocity += transform.x * 10
+		rotation = prevrota

@@ -6,6 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_wg3u8"]
 
 [node name="fish1" type="Node2D"]
+z_index = -3
 script = ExtResource("1_wg3u8")
 
 [node name="sprite" type="Sprite2D" parent="."]

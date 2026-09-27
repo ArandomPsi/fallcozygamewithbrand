@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://bm4677sv55dym"]
+[gd_scene load_steps=46 format=4 uid="uid://bm4677sv55dym"]
 
 [ext_resource type="Texture2D" uid="uid://hxluugwjy5ex" path="res://Minifantasy_ForgottenPlainsTiles.png" id="1_8vdae"]
 [ext_resource type="Script" uid="uid://cni0yluweyxl8" path="res://testmap.gd" id="1_x6wp4"]
@@ -8,9 +8,11 @@
 [ext_resource type="Material" uid="uid://dyy4yquq4bi5v" path="res://waterv1.tres" id="4_e86xl"]
 [ext_resource type="Shader" uid="uid://cjm3kroggbr3o" path="res://aqua.gdshader" id="4_x6wp4"]
 [ext_resource type="Script" uid="uid://b4cldevpym5re" path="res://bobber.gd" id="5_dbxb2"]
+[ext_resource type="FontFile" uid="uid://u0sqosgv6kdk" path="res://PixelMillennium-1oBZ.ttf" id="6_eatbo"]
 [ext_resource type="PackedScene" uid="uid://bo1rhf2p02i2v" path="res://fish_1.tscn" id="7_ov2oi"]
 [ext_resource type="Script" uid="uid://b2u7f1kk41hnw" path="res://rope.gd" id="8_p46d7"]
 [ext_resource type="AudioStream" uid="uid://j17qrpec4w5s" path="res://Gymnopedie no 1.mp3" id="10_u53cx"]
+[ext_resource type="Script" uid="uid://bhq4nogm2fv4k" path="res://hud.gd" id="13_dj5sq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6seei"]
 texture = ExtResource("1_8vdae")
@@ -696,6 +698,18 @@ region = Rect2(32, 32, 32, 32)
 atlas = ExtResource("2_axgwx")
 region = Rect2(64, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dj5sq"]
+atlas = ExtResource("2_axgwx")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7obgi"]
+atlas = ExtResource("2_axgwx")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syahw"]
+atlas = ExtResource("2_axgwx")
+region = Rect2(64, 96, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_eatbo"]
 atlas = ExtResource("2_axgwx")
 region = Rect2(0, 0, 32, 32)
@@ -750,8 +764,17 @@ animations = [{
 "duration": 5.0,
 "texture": SubResource("AtlasTexture_ov2oi")
 }, {
-"duration": 30.0,
+"duration": 23.0,
 "texture": SubResource("AtlasTexture_p46d7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dj5sq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7obgi")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_syahw")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_eatbo")
@@ -788,6 +811,9 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p46d7"]
 radius = 12.6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dj5sq"]
+radius = 3.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e86xl"]
 shader = ExtResource("3_ys0t5")
@@ -833,6 +859,150 @@ region_enabled = true
 region_rect = Rect2(133, 37, 21, 27.7828)
 
 [node name="Sprite2D2" type="Sprite2D" parent="TileMapLayer/Sprite2D"]
+modulate = Color(0, 0, 0, 0.52549)
+show_behind_parent = true
+position = Vector2(5.9, 7.7)
+scale = Vector2(1, 0.625926)
+skew = 1.03323
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D2" type="Sprite2D" parent="TileMapLayer"]
+position = Vector2(11.2, 7.6)
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D2" type="Sprite2D" parent="TileMapLayer/Sprite2D2"]
+modulate = Color(0, 0, 0, 0.52549)
+show_behind_parent = true
+position = Vector2(5.9, 7.7)
+scale = Vector2(1, 0.625926)
+skew = 1.03323
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D3" type="Sprite2D" parent="TileMapLayer"]
+position = Vector2(56.2, 2.2)
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D2" type="Sprite2D" parent="TileMapLayer/Sprite2D3"]
+modulate = Color(0, 0, 0, 0.52549)
+show_behind_parent = true
+position = Vector2(5.9, 7.7)
+scale = Vector2(1, 0.625926)
+skew = 1.03323
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D4" type="Sprite2D" parent="TileMapLayer"]
+position = Vector2(46.9, 8.3)
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D2" type="Sprite2D" parent="TileMapLayer/Sprite2D4"]
+modulate = Color(0, 0, 0, 0.52549)
+show_behind_parent = true
+position = Vector2(5.9, 7.7)
+scale = Vector2(1, 0.625926)
+skew = 1.03323
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D6" type="Sprite2D" parent="TileMapLayer"]
+position = Vector2(78.7, 3.2)
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D2" type="Sprite2D" parent="TileMapLayer/Sprite2D6"]
+modulate = Color(0, 0, 0, 0.52549)
+show_behind_parent = true
+position = Vector2(5.9, 7.7)
+scale = Vector2(1, 0.625926)
+skew = 1.03323
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D8" type="Sprite2D" parent="TileMapLayer"]
+position = Vector2(101.1, 1.8)
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D2" type="Sprite2D" parent="TileMapLayer/Sprite2D8"]
+modulate = Color(0, 0, 0, 0.52549)
+show_behind_parent = true
+position = Vector2(5.9, 7.7)
+scale = Vector2(1, 0.625926)
+skew = 1.03323
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D7" type="Sprite2D" parent="TileMapLayer"]
+position = Vector2(87.5, 6.2)
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D2" type="Sprite2D" parent="TileMapLayer/Sprite2D7"]
+modulate = Color(0, 0, 0, 0.52549)
+show_behind_parent = true
+position = Vector2(5.9, 7.7)
+scale = Vector2(1, 0.625926)
+skew = 1.03323
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D10" type="Sprite2D" parent="TileMapLayer"]
+position = Vector2(120.2, 4)
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D2" type="Sprite2D" parent="TileMapLayer/Sprite2D10"]
+modulate = Color(0, 0, 0, 0.52549)
+show_behind_parent = true
+position = Vector2(5.9, 7.7)
+scale = Vector2(1, 0.625926)
+skew = 1.03323
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D9" type="Sprite2D" parent="TileMapLayer"]
+position = Vector2(106.7, 7)
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D2" type="Sprite2D" parent="TileMapLayer/Sprite2D9"]
+modulate = Color(0, 0, 0, 0.52549)
+show_behind_parent = true
+position = Vector2(5.9, 7.7)
+scale = Vector2(1, 0.625926)
+skew = 1.03323
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D5" type="Sprite2D" parent="TileMapLayer"]
+position = Vector2(66, 8.3)
+texture = ExtResource("2_axgwx")
+region_enabled = true
+region_rect = Rect2(133, 37, 21, 27.7828)
+
+[node name="Sprite2D2" type="Sprite2D" parent="TileMapLayer/Sprite2D5"]
 modulate = Color(0, 0, 0, 0.52549)
 show_behind_parent = true
 position = Vector2(5.9, 7.7)
@@ -894,16 +1064,33 @@ lifetime = 0.4
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_dj5sq")
 
-[node name="guy" type="AnimatedSprite2D" parent="."]
+[node name="whatfish" type="Label" parent="."]
+visible = false
+texture_filter = 1
+offset_left = 765.0
+offset_top = 286.0
+offset_right = 1009.0
+offset_bottom = 318.0
+theme_override_colors/font_color = Color(1, 0.95, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("6_eatbo")
+theme_override_font_sizes/font_size = 32
+text = "caught: joe mama"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="guy" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("label")]
 z_index = 1
 texture_filter = 1
 position = Vector2(896, 407)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_dbxb2")
 animation = &"fishpullout"
-frame = 5
+frame = 8
+frame_progress = 1.0
 flip_h = true
 script = ExtResource("4_6seei")
+label = NodePath("../whatfish")
 
 [node name="shadow" type="Sprite2D" parent="guy"]
 modulate = Color(0, 0, 0, 0.407843)
@@ -931,6 +1118,22 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="guy/bobber/Area2D"]
 shape = SubResource("CircleShape2D_p46d7")
+debug_color = Color(0, 0.595, 0.7, 0)
+
+[node name="Area2D2" type="Area2D" parent="guy/bobber"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="guy/bobber/Area2D2"]
+shape = SubResource("CircleShape2D_dj5sq")
+debug_color = Color(0, 0.595, 0.7, 0)
+
+[node name="Camera2D" type="Camera2D" parent="guy"]
+position = Vector2(-2.6, -5.9)
+limit_left = 0
+limit_top = 0
+limit_right = 1152
+limit_bottom = 648
 
 [node name="rope" type="Line2D" parent="." node_paths=PackedStringArray("targetnode")]
 default_color = Color(0, 0, 0, 1)
@@ -950,7 +1153,42 @@ environment = SubResource("Environment_8vdae")
 
 [node name="fish1" parent="." instance=ExtResource("7_ov2oi")]
 modulate = Color(1, 1, 1, 0.388235)
-z_index = -3
+position = Vector2(286, 505)
+
+[node name="fish2" parent="." instance=ExtResource("7_ov2oi")]
+modulate = Color(1, 1, 1, 0.388235)
+position = Vector2(286, 505)
+
+[node name="fish3" parent="." instance=ExtResource("7_ov2oi")]
+modulate = Color(1, 1, 1, 0.388235)
+position = Vector2(286, 505)
+
+[node name="fish4" parent="." instance=ExtResource("7_ov2oi")]
+modulate = Color(1, 1, 1, 0.388235)
+position = Vector2(286, 505)
+
+[node name="fish5" parent="." instance=ExtResource("7_ov2oi")]
+modulate = Color(1, 1, 1, 0.388235)
+position = Vector2(286, 505)
+
+[node name="fish6" parent="." instance=ExtResource("7_ov2oi")]
+modulate = Color(1, 1, 1, 0.388235)
+position = Vector2(286, 505)
+
+[node name="fish7" parent="." instance=ExtResource("7_ov2oi")]
+modulate = Color(1, 1, 1, 0.388235)
+position = Vector2(286, 505)
+
+[node name="fish8" parent="." instance=ExtResource("7_ov2oi")]
+modulate = Color(1, 1, 1, 0.388235)
+position = Vector2(286, 505)
+
+[node name="fish9" parent="." instance=ExtResource("7_ov2oi")]
+modulate = Color(1, 1, 1, 0.388235)
+position = Vector2(286, 505)
+
+[node name="fish10" parent="." instance=ExtResource("7_ov2oi")]
+modulate = Color(1, 1, 1, 0.388235)
 position = Vector2(286, 505)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -958,4 +1196,51 @@ stream = ExtResource("10_u53cx")
 volume_db = -20.0
 autoplay = true
 
+[node name="hud" type="CanvasLayer" parent="."]
+script = ExtResource("13_dj5sq")
+
+[node name="fishdex" type="Panel" parent="hud"]
+offset_right = 443.0
+offset_bottom = 651.0
+
+[node name="Label" type="Label" parent="hud/fishdex"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -135.5
+offset_top = 15.0
+offset_right = 137.5
+offset_bottom = 47.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("6_eatbo")
+theme_override_font_sizes/font_size = 32
+text = "Fishdex"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="hud/fishdex"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 51.0
+offset_right = -25.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("6_eatbo")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Get catching!"
+
+[node name="fishspawner" type="Node2D" parent="."]
+position = Vector2(-29, 351)
+
 [connection signal="animation_finished" from="guy" to="guy" method="_on_animation_finished"]
+[connection signal="area_entered" from="guy/bobber/Area2D2" to="guy/bobber" method="_on_area_2d_2_body_entered"]
